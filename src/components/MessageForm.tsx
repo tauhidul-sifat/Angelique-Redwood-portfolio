@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { AlertDialogCancel, AlertDialogFooter } from "./ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 
-const MessageForm = () => {
+const MessageForm = ({ modal }: { modal?: boolean }) => {
   const { toast } = useToast();
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -51,9 +51,11 @@ const MessageForm = () => {
             name="fastName"
             render={({ field }) => (
               <FormItem className="w-full flex-1">
-                <FormLabel className="p-0">Fast Name:</FormLabel>
-                <FormControl>
-                  <Input placeholder="Fast Name" {...field} />
+                <FormLabel className="p-0 text-lg text-gray-500">
+                  Fast Name
+                </FormLabel>
+                <FormControl className="lg:p-3">
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -64,9 +66,11 @@ const MessageForm = () => {
             name="lastName"
             render={({ field }) => (
               <FormItem className="w-full flex-1">
-                <FormLabel>Last Name:</FormLabel>
+                <FormLabel className="p-0 text-lg text-gray-500">
+                  Last Name
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Last Name" {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -78,9 +82,9 @@ const MessageForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email:</FormLabel>
+              <FormLabel className="p-0 text-lg text-gray-500">Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your Email address" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -91,12 +95,11 @@ const MessageForm = () => {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject:</FormLabel>
+              <FormLabel className="p-0 text-lg text-gray-500">
+                Subject
+              </FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter your conversation subject"
-                  {...field}
-                />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,21 +110,26 @@ const MessageForm = () => {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message:</FormLabel>
+              <FormLabel className="p-0 text-lg text-gray-500">
+                Message
+              </FormLabel>
               <FormControl>
-                <Textarea
-                  className="w-full"
-                  placeholder="Enter your Message"
-                  {...field}
-                />
+                <Textarea className="w-full" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button type="submit">Submit</Button>
+          {modal && <AlertDialogCancel>Cancel</AlertDialogCancel>}
+          <Button
+            className={`${
+              modal ?? "w-full mt-5 p-4 lg:p-6 dark:text-secondary-foreground"
+            }`}
+            type="submit"
+          >
+            Submit
+          </Button>
         </AlertDialogFooter>
       </form>
     </Form>

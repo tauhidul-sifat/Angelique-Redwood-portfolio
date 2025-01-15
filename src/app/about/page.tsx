@@ -6,19 +6,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { profileDetails, workDetails } from "@/constants";
 
 const page = () => {
   return (
@@ -89,127 +83,68 @@ const page = () => {
       <hr />
       <div className="py-3">
         <SectionHeading className="text-center text-4xl font-medium py-4 text-muted-foreground">
-          About
+          {profileDetails.about.title || "About"}
         </SectionHeading>
         <div className="space-y-3 px-6 font-medium text-gray-500 text-center">
-          <p>
-            I'm a dedicated, detail-oriented worker who is eager to expand my
-            horizons. I have extensive experience working in writing, editing,
-            transcription, and administration. My ideal job would be one that
-            allows me to put my literary skills to good use while allowing for
-            personal growth and development.
-          </p>
-          <p>
-            I've grown my copywriting strengths in creative fiction and fantasy,
-            research-based opinion pieces, spiritual blog articles, and
-            administrative content, while my interests foster my love of
-            incredible storytelling, whether it be through movies, music, or all
-            things literature.
-          </p>
-          <hr />
-          <p>
-            As a voracious reader, it’s only natural that writing is my second
-            indulgence. So why not combine both? Here I sit, a literature geek,
-            constantly trying to learn from my past in the present, with my love
-            of fiction, sci-fi, and fantasy always reminding me most of my
-            reality. So now, I’m choosing to write all the thoughts out. Welcome
-            to Redwood’s Third-Eye Review.
-          </p>
+          {profileDetails.about.peras.map((pera) => {
+            return <p key={pera}>{pera}</p>;
+          })}
         </div>
       </div>
       <hr />
       <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
         I work efficiently
       </SectionHeading>
-      <Tabs
-        defaultValue="top-skills"
-        className=" place-content-center px-10 hidden lg:grid"
-      >
-        <TabsList className="border border-primary">
-          <TabsTrigger value="top-skills">Top Skills</TabsTrigger>
-          <TabsTrigger value="services">Services</TabsTrigger>
-        </TabsList>
-        <TabsContent value="top-skills">
-          <div>
-            <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
-              Top Skills
-            </SectionHeading>
-            <Tabs
-              defaultValue="Creative-Writing"
-              className="grid place-content-center"
-            >
-              <TabsList className="border border-primary">
-                <TabsTrigger value="Creative-Writing">
-                  Creative Writing
+      {
+        <Tabs
+          defaultValue={workDetails.defaultValue}
+          className="place-content-center px-10 hidden lg:grid"
+        >
+          <TabsList className="border border-primary">
+            {workDetails.tabs.map((tab) => {
+              return (
+                <TabsTrigger key={tab.value} value={tab.value}>
+                  {tab.label}
                 </TabsTrigger>
-                <TabsTrigger value="Proofreading">Proofreading</TabsTrigger>
-                <TabsTrigger value="Copywriting">Copywriting</TabsTrigger>
-                <TabsTrigger value="Transcription">Transcription</TabsTrigger>
-              </TabsList>
-              <div className="p-5 text-center lg:text-start">
-                <TabsContent value="Creative-Writing">
-                  Add your content here
-                </TabsContent>
-                <TabsContent value="Proofreading">
-                  Add your Creative-Writing content here
-                </TabsContent>
-                <TabsContent value="Copywriting">
-                  Add your Copywriting content here
-                </TabsContent>
-                <TabsContent value="Transcription">
-                  Add your Transcription content here
-                </TabsContent>
-              </div>
-            </Tabs>
-          </div>
-        </TabsContent>
-        <TabsContent value="services">
-          <div>
-            <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
-              Services
-            </SectionHeading>
-            <Tabs defaultValue="Blogging" className="grid place-content-center">
-              <TabsList className="border border-primary px-3">
-                <TabsTrigger value="Blogging">Blogging</TabsTrigger>
-                <TabsTrigger value="Copywriting">Copywriting</TabsTrigger>
-                <TabsTrigger value="Editing">Editing</TabsTrigger>
-                <TabsTrigger value="Administrative-Assistance">
-                  Administrative Assistance
-                </TabsTrigger>
-                <TabsTrigger value="Human-Resources">
-                  Human Resources (HR)
-                </TabsTrigger>
-                <TabsTrigger value="Transcription">Transcription</TabsTrigger>
-              </TabsList>
-              <div className="p-5 text-center lg:text-start">
-                <TabsContent value="Blogging">
-                  Add your Blogging content here
-                </TabsContent>
-                <TabsContent value="Copywriting">
-                  Add your Copywriting content here
-                </TabsContent>
-                <TabsContent value="Editing">
-                  Add your Editing content here
-                </TabsContent>
-                <TabsContent value="Human-Resources">
-                  {" "}
-                  Add your Human-Resources content here
-                </TabsContent>
-                <TabsContent value="Administrative-Assistance">
-                  Add your Administrative-Assistance content here
-                </TabsContent>
-                <TabsContent value="Writing">
-                  Add your Writing content here
-                </TabsContent>
-                <TabsContent value="Transcription">
-                  Add your Transcription content here
-                </TabsContent>
-              </div>
-            </Tabs>
-          </div>
-        </TabsContent>
-      </Tabs>
-      <hr />
+              );
+            })}
+          </TabsList>
+          {workDetails.tabs.map((tab) => {
+            return (
+              <TabsContent key={tab.value} value={tab.value}>
+                <div>
+                  <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
+                    {tab.label}
+                  </SectionHeading>
+                  <Tabs
+                    defaultValue={tab.content.default}
+                    className="grid place-content-center"
+                  >
+                    <TabsList>
+                      {tab.content.details.map((item) => {
+                        return (
+                          <TabsTrigger value={item.value} key={item.value}>
+                            {item.label}
+                          </TabsTrigger>
+                        );
+                      })}
+                    </TabsList>
+                    <div className="p-5 text-center lg:text-start">
+                      {tab.content.details.map((item) => {
+                        return (
+                          <TabsContent key={item.value} value={item.value}>
+                            {item.content}
+                          </TabsContent>
+                        );
+                      })}
+                    </div>
+                  </Tabs>
+                </div>
+              </TabsContent>
+            );
+          })}
+        </Tabs>
+      }
     </div>
   );
 };

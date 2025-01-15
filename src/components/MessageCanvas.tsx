@@ -47,7 +47,7 @@ const MessageCanvas = ({ icon }: { icon?: boolean }) => {
             This message will be received to Web Solution company.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <MessageForm />
+        <MessageForm modal />
       </AlertDialogContent>
     </AlertDialog>
   );
