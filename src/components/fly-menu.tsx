@@ -18,7 +18,7 @@ function FlySheet() {
         <AlignJustify size={30} className="text-primary" />
       </SheetTrigger>
       <SheetContent>
-        <SheetTitle className="text-center">Tauhidul</SheetTitle>
+        <SheetTitle className="text-center">Angelique Redwood</SheetTitle>
         <div>
           <ul
             className="max-h-[70vh] overflow-auto 

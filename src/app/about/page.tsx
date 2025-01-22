@@ -6,12 +6,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 import { BadgeCheck } from "lucide-react";
 import Image from "next/image";
-import React from "react";
 import { profileDetails, workDetails } from "@/constants";
 
 const page = () => {
@@ -95,58 +92,87 @@ const page = () => {
       <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
         I work efficiently
       </SectionHeading>
-      {
-        <Tabs
-          defaultValue={workDetails.defaultValue}
-          className="place-content-center px-10 hidden lg:grid"
-        >
-          <TabsList className="border border-primary">
-            {workDetails.tabs.map((tab) => {
-              return (
-                <TabsTrigger key={tab.value} value={tab.value}>
-                  {tab.label}
-                </TabsTrigger>
-              );
-            })}
-          </TabsList>
+      <Tabs
+        defaultValue={workDetails.defaultValue}
+        className="place-content-center px-10 hidden lg:grid"
+      >
+        <TabsList className="border border-primary">
           {workDetails.tabs.map((tab) => {
             return (
-              <TabsContent key={tab.value} value={tab.value}>
-                <div>
-                  <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
-                    {tab.label}
-                  </SectionHeading>
-                  <Tabs
-                    defaultValue={tab.content.default}
-                    className="grid place-content-center"
-                  >
-                    <TabsList>
-                      {tab.content.details.map((item) => {
-                        return (
-                          <TabsTrigger value={item.value} key={item.value}>
-                            {item.label}
-                          </TabsTrigger>
-                        );
-                      })}
-                    </TabsList>
-                    <div className="p-5 text-center lg:text-start">
-                      {tab.content.details.map((item) => {
-                        return (
-                          <TabsContent key={item.value} value={item.value}>
-                            {item.content}
-                          </TabsContent>
-                        );
-                      })}
-                    </div>
-                  </Tabs>
-                </div>
-              </TabsContent>
+              <TabsTrigger key={tab.value} value={tab.value}>
+                {tab.label}
+              </TabsTrigger>
             );
           })}
-        </Tabs>
-      }
+        </TabsList>
+        {workDetails.tabs.map((tab) => {
+          return (
+            <TabsContent key={tab.value} value={tab.value}>
+              <div>
+                <SectionHeading className="text-center text-2xl font-medium py-4 text-muted-foreground">
+                  {tab.label}
+                </SectionHeading>
+                <Tabs
+                  defaultValue={tab.content.default}
+                  className="grid place-content-center"
+                >
+                  <TabsList>
+                    {tab.content.details.map((item) => {
+                      return (
+                        <TabsTrigger value={item.value} key={item.value}>
+                          {item.label}
+                        </TabsTrigger>
+                      );
+                    })}
+                  </TabsList>
+                  <div className="p-5 text-center lg:text-start">
+                    {tab.content.details.map((item) => {
+                      return (
+                        <TabsContent key={item.value} value={item.value}>
+                          {item.content}
+                        </TabsContent>
+                      );
+                    })}
+                  </div>
+                </Tabs>
+              </div>
+            </TabsContent>
+          );
+        })}
+      </Tabs>
+      <div className="lg:hidden my-3">
+        {workDetails.tabs.map((tab) => {
+          return (
+            <div className=" px-6" key={tab.value}>
+              <h2 className="text-xl py-2 -translate-x-3 font-medium">
+                {tab.label}
+              </h2>
+              <ul className="space-y-1">
+                {tab.content.details.map((item) => {
+                  return (
+                    <li
+                      className="p-2 border rounded-md border-gray-300/30"
+                      key={item.value}
+                    >
+                      {item.label}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
 export default page;
+
+export async function generateMetadata() {
+  return {
+    title: "About Angelique Redwood | Freelance Writer & Author",
+    description: `Get to know Angelique Redwood, a passionate wordsmith with a unique voice. Learn about her writing journey, experience, and the inspiration behind her work.
+`,
+  };
+}

@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   /* config options here */
-  // reactStrictMode: true,
+  reactStrictMode: true,
 };
 
 export default nextConfig;

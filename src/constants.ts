@@ -1,15 +1,11 @@
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Twitter,
-} from "lucide-react";
-import { FaUpwork } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa";
+import { Mail, MapPin } from "lucide-react";
+import { TbBrandFiverr } from "react-icons/tb";
+import { FaUpwork, FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
+import { FaLinkedin, FaFacebook } from "react-icons/fa";
 import { SiFiverr, SiFreelancer } from "react-icons/si";
+import { FaBookReader } from "react-icons/fa";
+import { PiArticleNyTimes } from "react-icons/pi";
+import { ImBlog } from "react-icons/im";
 import { z } from "zod";
 
 export const navDatas = [
@@ -22,12 +18,12 @@ export const navDatas = [
     href: "/about",
   },
   {
-    name: "Blogs & articles",
-    href: "/blog-and-articles",
+    name: "Articles",
+    href: "/articles",
   },
   {
-    name: "Videos",
-    href: "/videos",
+    name: "Blogs",
+    href: "/blogs",
   },
   {
     name: "Books",
@@ -165,34 +161,43 @@ export const contactDetails = {
   address: [
     {
       Icon: MapPin,
-      label: "8502 Preston Rd. Inglewood, Maine 98380, USA",
+      label: "State College, Pennsylvania, United States ",
       id: "8502",
     },
     {
       Icon: Mail,
-      label: "kenzi.lawson@example.com",
+      label: "angeliqueredwood@gmail.com",
       id: "854",
     },
-    // {
-    //   Icon: Phone,
-    //   label: ["+1 (555) 555-5555", "+1 (555) 555-5556", "+1 (555) 555-5557"],
-    //   id: "7634",
-    // },
   ],
   socialMedias: {
     label: "Follow us on",
     icons: [
-      { Icon: Twitter, label: "Twitter", url: "#" },
-      { Icon: Facebook, label: "Facebook", url: "#" },
+      { Icon: FaSquareXTwitter, label: "Twitter", url: "#" },
+      { Icon: FaFacebook, label: "Facebook", url: "#" },
       {
-        Icon: Linkedin,
+        Icon: FaLinkedin,
         label: "Linkedin",
-        url: "https://tailgrids.com/components",
+        url: "https://www.linkedin.com/in/angeliqueredwood/",
       },
-      { Icon: Instagram, label: "Instagram", url: "#" },
+      { Icon: FaSquareInstagram, label: "Instagram", url: "#" },
     ],
   },
 };
+
+export const footersocialIcons = [
+  { Icon: FaUpwork, url: "#", label: "Upwork" },
+  { Icon: TbBrandFiverr, url: "#", label: "Fiverr" },
+  { Icon: SiFreelancer, url: "#", label: "Freelancer" },
+  { Icon: FaSquareXTwitter, label: "Twitter", url: "#" },
+  { Icon: FaFacebook, label: "Facebook", url: "#" },
+  {
+    Icon: FaLinkedin,
+    label: "Linkedin",
+    url: "https://www.linkedin.com/in/angeliqueredwood/",
+  },
+  { Icon: FaSquareInstagram, label: "Instagram", url: "#" },
+];
 
 export const WorkMarketPlace = [
   {
@@ -218,5 +223,32 @@ export const WorkMarketPlace = [
     url: "#",
     label: "Linkedin",
     description: "Create engaging content that resonates with your audience",
+  },
+];
+
+export const featureLinks = [
+  {
+    label: "Blogs",
+    url: "/blogs",
+    Icon: ImBlog,
+    title: "Writing Insights & Creative Musings",
+    description:
+      " Dive into the latest writing tips, creative inspiration, and industry news on Angelique Redwood's blog. Find valuable advice for aspiring writers and stay updated on her latest projects.",
+  },
+  {
+    label: "Articles",
+    url: "/articles",
+    Icon: PiArticleNyTimes,
+    title: "Explore a Diverse Collection",
+    description:
+      " Dive into the latest writing tips, creative inspiration, and industry news on Angelique Redwood's blog. Find valuable advice for aspiring writers and stay updated on her latest projects.",
+  },
+  {
+    label: "Books",
+    url: "/books",
+    Icon: FaBookReader,
+    title: "Discover Her Published Works",
+    description:
+      "Discover the captivating world of Angelique Redwood's published books. Explore a range of genres and find the perfect read for your next literary adventure.",
   },
 ];

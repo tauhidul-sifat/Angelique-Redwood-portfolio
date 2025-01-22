@@ -9,10 +9,6 @@ export function optimizeUrl(inputUrl: string) {
       const targetPath = pathname!.split("/")[3];
       return `https://static.wixstatic.com/media/${targetPath}`;
     }
-    throw new Error(
-      "Error ocurrying from Image URL optimization module: " +
-        "error base on " +
-        inputUrl
-    );
+    return "/defualt-image.svg";
   }
 }

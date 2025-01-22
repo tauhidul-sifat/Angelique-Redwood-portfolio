@@ -8,12 +8,11 @@ import {
 import { contactDetails, WorkMarketPlace } from "@/constants";
 import { Phone } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 const page = () => {
   return (
     <section
-      className="min-h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] rounded-md  bg-gradient-to-r from-fuchsia-600/20 to-blue-600/20 overflow-auto
+      className="min-h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] rounded-md border border-gray-300/30 bg-gradient-to-r from-fuchsia-600/20 to-blue-600/20 overflow-auto
      lg:[&::-webkit-scrollbar]:w-1
   lg:[&::-webkit-scrollbar-track]:bg-gray-100
   lg:[&::-webkit-scrollbar-thumb]:bg-gray-300
@@ -31,7 +30,7 @@ const page = () => {
             sint. Velit officia consequat duis.
           </p>
         </div>
-        <div className="max-w-6xl  mx-auto mt-6 overflow-hidden bg-primary-foreground mb-3 rounded-md shadow-md lg:mt-10">
+        <div className="max-w-6xl  mx-auto mt-6 overflow-hidden dark:backdrop-brightness-50 mb-3 rounded-md shadow-md lg:mt-10">
           <div className="grid items-stretch grid-cols-1 lg:grid-cols-5">
             <div className="lg:col-span-3">
               <div className="p-6 sm:p-10">
@@ -122,7 +121,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="py-3 bg-primary-foreground lg:mt-10 border-t border-gray-300/30">
+      <div className="py-3 dark:backdrop-brightness-50 lg:mt-10 border-t bg-[url(/bg.svg)] ">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <h2 className="text-3xl py-3 lg:py-8 text-center font-bold leading-tight  sm:text-4xl lg:text-5xl">
             Work via market place
@@ -135,7 +134,7 @@ const page = () => {
                   href={url}
                   target="_blank"
                   key={label}
-                  className="border border-gray-300/30 p-4 rounded-md bg-primary-foreground duration-300  hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3"
+                  className="border border-primary/20 backdrop-blur-3xl p-4 dark:backdrop-brightness-50 rounded-md duration-300  hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3"
                 >
                   <div className="flex items-center justify-center w-20 h-20 mx-auto bg-blue-100 rounded-full">
                     {<Icon className="text-blue-600 w-9 h-9" />}
@@ -153,3 +152,11 @@ const page = () => {
 };
 
 export default page;
+
+export async function generateMetadata() {
+  return {
+    title: "Contact Angelique Redwood | Freelance Writer & Author",
+    description: ` Get in touch with Angelique Redwood for inquiries, collaborations, or to discuss your writing projects.
+`,
+  };
+}

@@ -2,7 +2,6 @@
 import { navDatas } from "@/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 const SideMenu = () => {
   const pathname = usePathname();
@@ -25,8 +24,9 @@ const SideMenu = () => {
           {navDatas.map((data) => (
             <Link
               key={data.name}
-              className={`p-3 duration-200 block text-md font-medium rounded-full ${
-                pathname == data.href && "bg-primary text-primary-foreground"
+              className={`p-3 duration-200 block text-md hover:bg-primary/50 font-medium rounded-full ${
+                pathname == data.href &&
+                "bg-primary hover:bg-primary/90 text-primary-foreground"
               }`}
               href={data.href}
             >
