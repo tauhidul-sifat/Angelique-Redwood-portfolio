@@ -1,12 +1,11 @@
 import { LoadingCard } from "@/components/CardLoading";
-import { optimizeUrl } from "@/lib/optimizeUrl";
 import { myWixClient } from "@/lib/WixOauth";
+import { media } from "@wix/sdk";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 const page = async () => {
   const { items } = await myWixClient.items.query("ArticleWritingCms").find();
-  // console.log(items);
   return (
     <div
       className="min-h-[calc(100vh-120px)] bg-[url(/bg.svg)]  rounded-md border border-gray-300/30 max-h-[calc(100vh-120px)] overflow-auto w-full
@@ -27,7 +26,12 @@ const page = async () => {
                 <div className="relative rounded-lg overflow-hidden duration-300 backdrop-blur-lg hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3 border border-gray-300/30">
                   <Image
                     className="w-full h-64 object-cover"
-                    src={optimizeUrl(item.image)}
+                    src={media.getScaledToFillImageUrl(
+                      item.image,
+                      600,
+                      700,
+                      {}
+                    )}
                     alt={item.title}
                     width={400}
                     height={560}

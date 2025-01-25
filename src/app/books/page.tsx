@@ -1,6 +1,6 @@
 import { LoadingCard } from "@/components/CardLoading";
-import { optimizeUrl } from "@/lib/optimizeUrl";
 import { myWixClient } from "@/lib/WixOauth";
+import { media } from "@wix/sdk";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -35,8 +35,13 @@ const page = async () => {
                     <Suspense fallback={<LoadingCard />}>
                       <Image
                         className="w-full h-64 object-cover"
-                        src={optimizeUrl(item.coverImage)}
-                        alt={item.bookName}
+                        src={media.getScaledToFillImageUrl(
+                          item.coverImage,
+                          600,
+                          700,
+                          {}
+                        )}
+                        alt={item.title || "book"}
                         height={200}
                         width={300}
                       />
