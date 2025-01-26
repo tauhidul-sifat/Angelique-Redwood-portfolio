@@ -60,10 +60,10 @@ const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
-export async function generateStaticParams() {
-  const { items } = await myWixClient.items.query("ArticleWritingCms").find();
-  return items.map((item) => ({ params: { id: item._id } }));
-}
+// export async function generateStaticParams() {
+//   const { items } = await myWixClient.items.query("ArticleWritingCms").find();
+//   return items.map((item) => ({ params: { id: item._id } }));
+// }
 
 export async function generateMetadata({
   params,

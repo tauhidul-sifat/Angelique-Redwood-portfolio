@@ -37,10 +37,13 @@ const page = async () => {
                     height={560}
                     loading="lazy"
                   />
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r opacity-50"></div>
                   <div className="p-4">
-                    <h3 className="text-lg font-bold">{item.title}</h3>
-                    <p className="mt-2 text-sm text-gray-500">{item.summary}</p>
+                    <h3 className="text-lg line-clamp-2 font-bold">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-500">
+                      {item.summary && item.summary}
+                    </p>
                   </div>
                 </div>
               </Link>

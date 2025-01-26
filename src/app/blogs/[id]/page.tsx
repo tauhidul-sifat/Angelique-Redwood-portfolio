@@ -6,10 +6,6 @@ import { notFound } from "next/navigation";
 const RichContentViewer = dynamic(
   () => import("@/components/RichContentViewer")
 );
-export async function generateStaticParams() {
-  const { items } = await myWixClient.items.query("BlogCmsStructure").find();
-  return items.map((item) => ({ params: { id: item._id } }));
-}
 
 const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -67,6 +63,9 @@ const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
 };
 
+export default blog;
+
+// Get blog data from an API or database
 export async function generateMetadata({
   params,
 }: {
@@ -80,4 +79,7 @@ export async function generateMetadata({
   };
 }
 
-export default blog;
+// export async function generateStaticParams() {
+//   const { items } = await myWixClient.items.query("BlogCmsStructure").find();
+//   return items.map((item) => ({ params: { id: item._id } }));
+// }

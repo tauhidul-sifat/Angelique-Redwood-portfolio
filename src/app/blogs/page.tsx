@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 const page = async () => {
-  const { items } = await myWixClient.items.query("ArticleWritingCms").find();
+  const { items } = await myWixClient.items.query("BlogCmsStructure").find();
   return (
     <div
       className="min-h-[calc(100vh-120px)] bg-[url(/bg.svg)]  rounded-md border border-gray-300/30 max-h-[calc(100vh-120px)] overflow-auto w-full
@@ -27,7 +27,7 @@ const page = async () => {
                   <Image
                     className="w-full h-64 object-cover"
                     src={media.getScaledToFillImageUrl(
-                      item.image,
+                      item.featuredImage,
                       600,
                       700,
                       {}
@@ -37,10 +37,13 @@ const page = async () => {
                     height={560}
                     loading="lazy"
                   />
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r opacity-50"></div>
                   <div className="p-4">
-                    <h3 className="text-lg font-bold">{item.title}</h3>
-                    <p className="mt-2 text-sm text-gray-500">{item.summary}</p>
+                    <h3 className="text-lg font-bold line-clamp-2">
+                      {item.title && item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-500">
+                      {item.summary && item.summary}
+                    </p>
                   </div>
                 </div>
               </Link>
