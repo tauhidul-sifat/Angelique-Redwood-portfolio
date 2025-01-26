@@ -1,11 +1,7 @@
 import { myWixClient } from "@/lib/WixOauth";
 import { ChevronLeft } from "lucide-react";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-const RichContentViewer = dynamic(
-  () => import("@/components/RichContentViewer")
-);
 
 const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -48,11 +44,7 @@ const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
                   {blog?.publishDate && blog?.publishDate}
                 </span>
               </div>
-              <div className="dark:text-white">
-                {blog?.richContent && (
-                  <RichContentViewer content={blog?.richContent} />
-                )}
-              </div>
+              <div className="dark:text-white"></div>
             </div>
           </div>
         </div>

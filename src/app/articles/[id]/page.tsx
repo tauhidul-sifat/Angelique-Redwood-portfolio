@@ -2,10 +2,6 @@ import { myWixClient } from "@/lib/WixOauth";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import dynamic from "next/dynamic";
-const RichContentViewer = dynamic(
-  () => import("@/components/RichContentViewer")
-);
 const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const article = await myWixClient.items.get("ArticleWritingCms", id);
@@ -46,10 +42,6 @@ const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
                   {article?.publishDate && article?.publishDate}
                 </span>
               </div>
-              {/* ------------------------------------------------------------------------------ */}
-              {article?.richcontent && (
-                <RichContentViewer content={article?.richcontent} />
-              )}
             </div>
           </div>
         </div>
