@@ -7,7 +7,6 @@ import { Suspense } from "react";
 
 export default async function ArticlesPage() {
   const { items } = await myWixClient.items.query("ArticleWritingCms").find();
-  console.log("Article pages loaded");
 
   return (
     <div
@@ -23,35 +22,38 @@ export default async function ArticlesPage() {
           ARTICLES
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-y-16 gap-10">
-          {items?.map((item) => (
-            <Suspense key={item._id} fallback={<LoadingCard />}>
-              <Link href={`articles/${item._id}`}>
-                <div className="relative rounded-lg overflow-hidden duration-300 backdrop-blur-lg hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3 border border-gray-300/30">
-                  <Image
-                    className="w-full h-64 object-cover"
-                    src={media.getScaledToFillImageUrl(
-                      item.image,
-                      600,
-                      700,
-                      {}
-                    )}
-                    alt={item.title}
-                    width={400}
-                    height={560}
-                    loading="lazy"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg line-clamp-2 font-bold">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-500">
-                      {item.summary && item.summary}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </Suspense>
-          ))}
+          {items?.map(
+            (item) =>
+              item.title && (
+                <Suspense key={item._id} fallback={<LoadingCard />}>
+                  <Link href={`articles/${item._id}`}>
+                    <div className="relative rounded-lg overflow-hidden duration-300 backdrop-blur-lg hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3 border border-gray-300/30">
+                      <Image
+                        className="w-full h-64 object-cover"
+                        src={media.getScaledToFillImageUrl(
+                          item.image,
+                          600,
+                          700,
+                          {}
+                        )}
+                        alt={item.title}
+                        width={400}
+                        height={560}
+                        loading="lazy"
+                      />
+                      <div className="p-4">
+                        <h3 className="text-lg line-clamp-2 font-bold">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-gray-500">
+                          {item.summary && item.summary}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </Suspense>
+              )
+          )}
         </div>
       </div>
     </div>

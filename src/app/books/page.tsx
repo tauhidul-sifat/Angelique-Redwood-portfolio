@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 export default async function BookPage() {
   const { items } = await myWixClient.items.query("BookstoreCollection").find();
-  console.log("Book Page loaded");
+
   return (
     <section
       className="py-10 min-h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] rounded-md border border-gray-300/30 overflow-auto w-full bg-[url(/bg.svg)] sm:py-16 lg:py-24 lg:[&::-webkit-scrollbar]:w-1
@@ -30,32 +30,34 @@ export default async function BookPage() {
         <div className="grid grid-cols-1 gap-6 px-4 mt-12 sm:px-0 xl:mt-20 xl:grid-cols-4 sm:grid-cols-2">
           {items.map((item) => {
             return (
-              <Suspense key={item._id} fallback={<LoadingCard />}>
-                <Link href={`/books/${item._id}`}>
-                  <div className="relative rounded-lg overflow-hidden duration-300 backdrop-blur-2xl  hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3 border border-gray-300/30">
-                    <Suspense fallback={<LoadingCard />}>
-                      <Image
-                        className="w-full h-64 object-cover"
-                        src={media.getScaledToFillImageUrl(
-                          item.coverImage,
-                          600,
-                          700,
-                          {}
-                        )}
-                        alt={item.title || "book"}
-                        height={200}
-                        width={300}
-                      />
-                    </Suspense>
-                    <div className="p-4">
-                      <h3 className="text-lg font-bold line-clamp-2">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm text-gray-500"></p>
+              item.title && (
+                <Suspense key={item._id} fallback={<LoadingCard />}>
+                  <Link href={`/books/${item._id}`}>
+                    <div className="relative rounded-lg overflow-hidden duration-300 backdrop-blur-2xl  hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3 border border-gray-300/30">
+                      <Suspense fallback={<LoadingCard />}>
+                        <Image
+                          className="w-full h-64 object-cover"
+                          src={media.getScaledToFillImageUrl(
+                            item.coverImage,
+                            600,
+                            700,
+                            {}
+                          )}
+                          alt={item.title || "book"}
+                          height={200}
+                          width={300}
+                        />
+                      </Suspense>
+                      <div className="p-4">
+                        <h3 className="text-lg font-bold line-clamp-2">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-gray-500"></p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </Suspense>
+                  </Link>
+                </Suspense>
+              )
             );
           })}
         </div>
