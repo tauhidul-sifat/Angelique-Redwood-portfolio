@@ -7,7 +7,6 @@ import { Suspense } from "react";
 
 export default async function BookPage() {
   const { items } = await myWixClient.items.query("BookstoreCollection").find();
-
   return (
     <section
       className="py-10 min-h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] rounded-md border border-gray-300/30 overflow-auto w-full bg-[url(/bg.svg)] sm:py-16 lg:py-24 lg:[&::-webkit-scrollbar]:w-1
