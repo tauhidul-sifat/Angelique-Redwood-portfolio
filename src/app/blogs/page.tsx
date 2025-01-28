@@ -4,8 +4,9 @@ import { media } from "@wix/sdk";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-const page = async () => {
+export default async function BlogPage() {
   const { items } = await myWixClient.items.query("BlogCmsStructure").find();
+  console.log("Blog page loaded");
   return (
     <div
       className="min-h-[calc(100vh-120px)] bg-[url(/bg.svg)]  rounded-md border border-gray-300/30 max-h-[calc(100vh-120px)] overflow-auto w-full
@@ -53,9 +54,9 @@ const page = async () => {
       </div>
     </div>
   );
-};
+}
 
-export default page;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   return {

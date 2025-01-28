@@ -1,5 +1,6 @@
 import { myWixClient } from "@/lib/WixOauth";
 import { ChevronLeft } from "lucide-react";
+import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -42,6 +43,11 @@ const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
                   {article?.publishDate && article?.publishDate}
                 </span>
               </div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(article.richContent),
+                }}
+              ></div>
             </div>
           </div>
         </div>

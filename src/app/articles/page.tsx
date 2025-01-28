@@ -4,8 +4,11 @@ import { media } from "@wix/sdk";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-const page = async () => {
+
+export default async function ArticlesPage() {
   const { items } = await myWixClient.items.query("ArticleWritingCms").find();
+  console.log("Article pages loaded");
+
   return (
     <div
       className="min-h-[calc(100vh-120px)] bg-[url(/bg.svg)]  rounded-md border border-gray-300/30 max-h-[calc(100vh-120px)] overflow-auto w-full
@@ -20,7 +23,7 @@ const page = async () => {
           ARTICLES
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-y-16 gap-10">
-          {items.map((item) => (
+          {items?.map((item) => (
             <Suspense key={item._id} fallback={<LoadingCard />}>
               <Link href={`articles/${item._id}`}>
                 <div className="relative rounded-lg overflow-hidden duration-300 backdrop-blur-lg hover:scale-105 hover:shadow-2xl lg:hover:translate-x-3 border border-gray-300/30">
@@ -53,9 +56,9 @@ const page = async () => {
       </div>
     </div>
   );
-};
+}
 
-export default page;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   return {

@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
-const page = async () => {
+export default async function BookPage() {
   const { items } = await myWixClient.items.query("BookstoreCollection").find();
+  console.log("Book Page loaded");
   return (
     <section
       className="py-10 min-h-[calc(100vh-120px)] max-h-[calc(100vh-120px)] rounded-md border border-gray-300/30 overflow-auto w-full bg-[url(/bg.svg)] sm:py-16 lg:py-24 lg:[&::-webkit-scrollbar]:w-1
@@ -61,11 +62,9 @@ const page = async () => {
       </div>
     </section>
   );
-};
+}
 
-export default page;
-
-// Return a list of `params` to populate the [slug] dynamic segment
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   return {
