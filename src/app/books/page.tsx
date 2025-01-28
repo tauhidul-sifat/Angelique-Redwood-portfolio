@@ -65,7 +65,8 @@ export default async function BookPage() {
   );
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata() {
   return {

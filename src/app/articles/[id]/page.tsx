@@ -3,7 +3,11 @@ import { ChevronLeft } from "lucide-react";
 import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function SingleArticle({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const article = await myWixClient.items.get("ArticleWritingCms", id);
   if (!article) {
@@ -56,12 +60,15 @@ const Article = async ({ params }: { params: Promise<{ id: string }> }) => {
       {/* <!-- End article Article --> */}
     </section>
   );
-};
+}
 
-// export async function generateStaticParams() {
-//   const { items } = await myWixClient.items.query("ArticleWritingCms").find();
-//   return items.map((item) => ({ params: { id: item._id } }));
-// }
+export const revalidate = 21600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const { items } = await myWixClient.items.query("ArticleWritingCms").find();
+  return items.map((item) => ({ params: { id: String(item._id) } }));
+}
 
 export async function generateMetadata({
   params,
@@ -75,5 +82,3 @@ export async function generateMetadata({
     description: data?.summary || "Description Not Available",
   };
 }
-
-export default Article;
