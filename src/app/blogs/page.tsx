@@ -59,7 +59,8 @@ export default async function BlogPage() {
   );
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function generateMetadata() {
   return {

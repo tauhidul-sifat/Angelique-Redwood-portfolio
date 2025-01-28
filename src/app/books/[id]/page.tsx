@@ -3,7 +3,11 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const Book = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function SingleBook({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   // Fetch book data from an API or database
   const book = await myWixClient.items.get("BookstoreCollection", id);
@@ -54,7 +58,15 @@ const Book = async ({ params }: { params: Promise<{ id: string }> }) => {
       {/* <!-- End Blog Article --> */}
     </section>
   );
-};
+}
+
+export const revalidate = 21600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const { items } = await myWixClient.items.query("BookstoreCollection").find();
+  return items.map((item) => ({ params: { id: item._id } }));
+}
 
 export async function generateMetadata({
   params,
@@ -68,10 +80,3 @@ export async function generateMetadata({
     description: data?.summary || "Description Not Available",
   };
 }
-
-export default Book;
-
-// export async function generateStaticParams() {
-//   const { items } = await myWixClient.items.query("BookstoreCollection").find();
-//   return items.map((item) => ({ params: { id: item._id } }));
-// }
