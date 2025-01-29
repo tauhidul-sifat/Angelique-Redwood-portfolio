@@ -1,9 +1,14 @@
 import { myWixClient } from "@/lib/WixOauth";
 import { ChevronLeft } from "lucide-react";
+import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function SingleBlog({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   // Fetch blog data from an API or database
   const blog = await myWixClient.items.get("BlogCmsStructure", id);
@@ -44,7 +49,13 @@ const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
                   {blog?.publishDate && blog?.publishDate}
                 </span>
               </div>
-              <div className="dark:text-white"></div>
+              {blog.richtext && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(blog.richtext),
+                  }}
+                ></div>
+              )}
             </div>
           </div>
         </div>
@@ -53,9 +64,15 @@ const blog = async ({ params }: { params: Promise<{ id: string }> }) => {
       {/* <!-- End Blog Article --> */}
     </section>
   );
-};
+}
 
-export default blog;
+export const revalidate = 21600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const { items } = await myWixClient.items.query("BlogCmsStructure").find();
+  return items.map((item) => ({ params: { id: item._id } }));
+}
 
 // Get blog data from an API or database
 export async function generateMetadata({
@@ -70,8 +87,3 @@ export async function generateMetadata({
     description: data?.summary || "Description Not Available",
   };
 }
-
-// export async function generateStaticParams() {
-//   const { items } = await myWixClient.items.query("BlogCmsStructure").find();
-//   return items.map((item) => ({ params: { id: item._id } }));
-// }
