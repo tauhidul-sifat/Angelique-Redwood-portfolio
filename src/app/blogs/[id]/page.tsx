@@ -1,5 +1,6 @@
 import { myWixClient } from "@/lib/WixOauth";
 import { ChevronLeft } from "lucide-react";
+import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -48,7 +49,13 @@ export default async function SingleBlog({
                   {blog?.publishDate && blog?.publishDate}
                 </span>
               </div>
-              <div className="dark:text-white"></div>
+              {blog.richtext && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(blog.richtext),
+                  }}
+                ></div>
+              )}
             </div>
           </div>
         </div>

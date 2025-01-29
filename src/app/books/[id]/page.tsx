@@ -1,6 +1,7 @@
 import { myWixClient } from "@/lib/WixOauth";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 import { notFound } from "next/navigation";
 
 export default async function SingleBook({
@@ -49,7 +50,13 @@ export default async function SingleBook({
                   {book?.publicationDate && book?.publicationDate}
                 </span>
               </div>
-              <div className="dark:text-white"></div>
+              {book.summary && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(book.summary),
+                  }}
+                ></div>
+              )}
             </div>
           </div>
         </div>

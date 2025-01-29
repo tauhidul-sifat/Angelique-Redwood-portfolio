@@ -47,11 +47,13 @@ export default async function SingleArticle({
                   {article?.publishDate && article?.publishDate}
                 </span>
               </div>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(article.richContent),
-                }}
-              ></div>
+              {article.richtext && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(article.richtext),
+                  }}
+                ></div>
+              )}
             </div>
           </div>
         </div>
