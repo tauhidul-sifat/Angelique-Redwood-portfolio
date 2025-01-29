@@ -28,11 +28,11 @@ export default async function SingleArticle({
           <div className="py-8 lg:pe-8">
             <div className="space-y-5 lg:space-y-8">
               <Link
-                className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline focus:outline-none focus:underline dark:text-blue-500"
+                className="inline-flex items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline focus:outline-none focus:underline dark:text-primary"
                 href="/articles"
               >
                 <ChevronLeft />
-                Back to articles
+                Back to Articles
               </Link>
 
               <h2 className="text-3xl font-bold lg:text-5xl dark:text-white">
@@ -40,18 +40,24 @@ export default async function SingleArticle({
               </h2>
 
               <div className="flex items-center gap-x-5">
-                <span className="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                  {article?.topic && article?.topic}
-                </span>
-                <span className="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                  {article?.publishDate && article?.publishDate}
-                </span>
+                {article.topic && (
+                  <span className="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                    {article?.topic}
+                  </span>
+                )}
+                {article.publishDate && (
+                  <span className="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
+                    {article?.publishDate}
+                  </span>
+                )}
               </div>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(article.richContent),
-                }}
-              ></div>
+              {article.richtext && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(article.richtext),
+                  }}
+                ></div>
+              )}
             </div>
           </div>
         </div>
